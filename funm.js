@@ -11,7 +11,7 @@ app.use(bodyParser.text({ type: "*/*" }));
 // -------------------- CONFIG --------------------
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const REDIRECT_URI = "http://localhost:7070/oauth2callback";
+const REDIRECT_URI = "https://bla-bla-bla-xzpf.onrender.com/oauth2callback";
 const SCOPE = "https://www.googleapis.com/auth/youtube.readonly";
 
 let ACCESS_TOKEN = null;
@@ -157,3 +157,4 @@ async function fetchAllComments() {
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
