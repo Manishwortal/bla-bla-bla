@@ -61,7 +61,7 @@ app.get("/oauth2callback", async (req, res) => {
 // -------------------- STEP 2: SUBSCRIBE --------------------
 async function subscribeToFeed(channelId) {
   const hubUrl = "https://pubsubhubbub.appspot.com/subscribe";
-  const callbackUrl = "http://localhost:7070/webhook";
+  const callbackUrl = "https://bla-bla-bla-xzpf.onrender.com/webhook";
   const params = new URLSearchParams({
     "hub.mode": "subscribe",
     "hub.topic": `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
@@ -157,4 +157,5 @@ async function fetchAllComments() {
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
