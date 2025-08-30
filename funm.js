@@ -12,17 +12,19 @@ app.use(bodyParser.text({ type: "*/*" }));
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = "https://bla-bla-bla-xzpf.onrender.com/oauth2callback";
-const SCOPE = "https://www.googleapis.com/auth/youtube.readonly";
+const SCOPES = [
+  "https://www.googleapis.com/auth/youtube.readonly",
+  "https://www.googleapis.com/auth/youtube.force-ssl"
+].join(" ");
 
 let ACCESS_TOKEN = null;
 let CHANNEL_ID = null;
 app.get("/auth", (req, res) => {
   const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(
-    REDIRECT_URI
-  )}&response_type=code&scope=${encodeURIComponent(
-    SCOPE
-  )}&access_type=offline&prompt=consent`;
-  res.redirect(authUrl);
+  REDIRECT_URI
+)}&response_type=code&scope=${encodeURIComponent(
+  SCOPES
+)}&access_type=offline&prompt=consent`;
 });
 
 app.get("/oauth2callback", async (req, res) => {
@@ -165,6 +167,7 @@ setInterval(() => {
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
 
 
