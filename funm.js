@@ -92,6 +92,7 @@ app.get("/webhook", (req, res) => {
 // -------------------- STEP 4: HANDLE NEW VIDEO UPLOAD --------------------
 app.post("/webhook", async (req, res) => {
   console.log("📩 New PubSub notification received");
+  console.log("Raw body:", req.body);  // 👈 should now print the XML
 
   // Parse XML body from YouTube
   xml2js.parseString(req.body, (err, result) => {
@@ -103,15 +104,17 @@ app.post("/webhook", async (req, res) => {
         const videoId = entry["yt:videoId"]?.[0];
         const title = entry.title?.[0];
         console.log("🎬 New Video Uploaded:", title, "(ID:", videoId, ")");
+      } else {
+        console.log("⚠️ No <entry> found in feed");
       }
     }
   });
 
-  // Always respond quickly
+  // Respond quickly so YouTube doesn’t retry
   res.status(200).send("OK");
 
-  // After new video -> fetch comments
-  await fetchAllComments();
+  // Fetch comments asynchronously (don’t block YouTube’s request)
+  fetchAllComments().catch(console.error);
 });
 
 // -------------------- FETCH ALL COMMENTS --------------------
@@ -157,6 +160,7 @@ async function fetchAllComments() {
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
 
 
