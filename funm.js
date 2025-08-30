@@ -21,10 +21,12 @@ let ACCESS_TOKEN = null;
 let CHANNEL_ID = null;
 app.get("/auth", (req, res) => {
   const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(
-  REDIRECT_URI
-)}&response_type=code&scope=${encodeURIComponent(
-  SCOPES
-)}&access_type=offline&prompt=consent`;
+    REDIRECT_URI
+  )}&response_type=code&scope=${encodeURIComponent(
+    SCOPES
+  )}&access_type=offline&prompt=consent`;
+
+  res.redirect(authUrl);   // 👈 this is missing
 });
 
 app.get("/oauth2callback", async (req, res) => {
@@ -165,6 +167,7 @@ setInterval(() => {
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
 
 
