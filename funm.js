@@ -157,15 +157,15 @@ async function fetchAllComments() {
 }
 let lastFetchedVideo = null;
 
-setInterval(async () => {
-    await fetchAllComments();
-  }
-}, 60000);
+setInterval(() => {
+  fetchAllComments()
+}, 6000);
 
 // -------------------- START --------------------
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
 
 
