@@ -155,11 +155,22 @@ async function fetchAllComments() {
     console.error("Error fetching comments:", err);
   }
 }
+let lastFetchedVideo = null;
+
+setInterval(async () => {
+  const latestVideo = await getLatestVideo();
+  if (latestVideo.id !== lastFetchedVideo) {
+    lastFetchedVideo = latestVideo.id;
+    console.log("🎬 New video detected:", latestVideo.title);
+    await fetchAllComments(latestVideo.id);
+  }
+}, 60000);
 
 // -------------------- START --------------------
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
 
 
