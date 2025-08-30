@@ -157,8 +157,6 @@ async function fetchAllComments() {
     console.error("Error fetching comments:", err);
   }
 }
-let lastFetchedVideo = null;
-
 setInterval(() => {
   if (ACCESS_TOKEN && CHANNEL_ID) fetchAllComments()
 }, 6000);
@@ -167,6 +165,7 @@ setInterval(() => {
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
 
 
