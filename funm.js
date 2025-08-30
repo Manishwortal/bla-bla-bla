@@ -158,11 +158,7 @@ async function fetchAllComments() {
 let lastFetchedVideo = null;
 
 setInterval(async () => {
-  const latestVideo = await getLatestVideo();
-  if (latestVideo.id !== lastFetchedVideo) {
-    lastFetchedVideo = latestVideo.id;
-    console.log("🎬 New video detected:", latestVideo.title);
-    await fetchAllComments(latestVideo.id);
+    await fetchAllComments();
   }
 }, 60000);
 
@@ -170,6 +166,7 @@ setInterval(async () => {
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
 
 
