@@ -145,7 +145,7 @@ async function fetchAllComments() {
           const snippet = item.snippet.topLevelComment.snippet;
           console.log("Name:", snippet.authorDisplayName);
           console.log("Comment:", snippet.textDisplay);
-          console.log("---------------------------");
+          console.log("------------------------erf---");
         });
       } else {
         console.log("No comments found for this video:", data);
@@ -158,13 +158,14 @@ async function fetchAllComments() {
 let lastFetchedVideo = null;
 
 setInterval(() => {
-  fetchAllComments()
+  if (ACCESS_TOKEN && CHANNEL_ID) fetchAllComments()
 }, 6000);
 
 // -------------------- START --------------------
 app.listen(7070, () =>
   console.log("🚀 Server running on http://localhost:7070")
 );
+
 
 
 
